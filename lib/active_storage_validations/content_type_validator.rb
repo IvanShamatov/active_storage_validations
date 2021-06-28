@@ -26,7 +26,9 @@ module ActiveStorageValidations
         if type.is_a?(Regexp)
           type
         else
-          Marcel::MimeType.for(declared_type: type.to_s, extension: type.to_s)
+          Marcel::TYPES[type.to_s] || raise(ArgumentError, "content_type must be one of Regxep,"\
+          " supported mime types (e.g. :png, 'jpg'), or mime type String ('image/jpeg')")
+          # Marcel::MimeType.for(declared_type: type.to_s, extension: type.to_s)
         end
       end
     end
